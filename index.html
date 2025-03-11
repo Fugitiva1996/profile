@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriela Diseño</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #1a1a1a;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .socials a {
+            color: white;
+            margin-left: 10px;
+        }
+        .hero {
+            padding-top: 80px;
+            text-align: center;
+        }
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            height: 500px; /* Altura fija del carrusel */
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        .carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Asegura que las imágenes cubran el contenedor sin distorsionarse */
+            display: none; /* Las imágenes no se mostrarán hasta ser activadas */
+        }
+        .carousel img.active {
+            display: block; /* La imagen activa será la visible */
+        }
+        .carousel .dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .dot.active {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            justify-items: center;
+        }
+        .project {
+            text-align: center;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+        .project img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .project:hover {
+            transform: scale(1.05);
+        }
+        .project h3 {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./assets/ilustraciona3.png" alt="Gabriela Diseño">
+            <span>Gabriela Diseño</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#merch">Merch</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="socials">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-x-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+    </header>
+    
+    <section id="home" class="hero">
+        <div class="carousel">
+            <img src="./assets/icon.png" alt="Proyecto 1" class="active">
+            <img src="./assets/ilustraciona3.png" alt="Proyecto 2">
+            <img src="work1.jpg" alt="Proyecto 3">
+            <div class="dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
+    
+    <section id="work" class="gallery">
+        <div class="project">
+            <img src="work1.jpg" alt="Proyecto 1">
+            <h3>Desarrollo web</h3>
+        </div>
+        <div class="project">
+            <img src="work2.jpg" alt="Proyecto 2">
+            <h3>Diseño UX/UI</h3>
+        </div>
+        <div class="project">
+            <img src="work3.jpg" alt="Proyecto 3">
+            <h3>Proyecto de arte digital</h3>
+        </div>
+    </section>
+
+    <script>
+        // Seleccionamos las imágenes del carrusel y los puntos de navegación
+        const images = document.querySelectorAll('.carousel img');
+        const dots = document.querySelectorAll('.dot');
+        let currentIndex = 0;
+
+        // Función para cambiar la imagen activa
+        function changeImage() {
+            // Elimina la clase 'active' de la imagen actual y el punto actual
+            images[currentIndex].classList.remove('active');
+            dots[currentIndex].classList.remove('active');
+            
+            // Cambia el índice de la imagen activa
+            currentIndex = (currentIndex + 1) % images.length;
+
+            // Añade la clase 'active' a la siguiente imagen y punto
+            images[currentIndex].classList.add('active');
+            dots[currentIndex].classList.add('active');
+        }
+
+        // Hacemos que la función se ejecute cada 3 segundos
+        setInterval(changeImage, 3000);
+
+        // Hacer que los puntos sean clickeables
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                // Eliminar la clase 'active' de la imagen y punto actuales
+                images[currentIndex].classList.remove('active');
+                dots[currentIndex].classList.remove('active');
+
+                // Establecer el nuevo índice
+                currentIndex = index;
+
+                // Añadir la clase 'active' a la nueva imagen y punto
+                images[currentIndex].classList.add('active');
+                dots[currentIndex].classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
